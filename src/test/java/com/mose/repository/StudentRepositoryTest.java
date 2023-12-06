@@ -20,9 +20,9 @@ class StudentRepositoryTest {
     @DisplayName("save student to db")
     public void saveStudent(){
         Student student= Student.builder()
-                .firstName("Sari")
+                .firstName("Hana")
                 .lastName(null)
-                .email("sarii@bes.edu")
+                .email("hanuti@bes.edu")
 //                .guardianName("Muse")
 //                .guardianEmail("musi@gmail.com")
 //                .guardianMobile("12222222")
@@ -42,7 +42,7 @@ class StudentRepositoryTest {
         Student student1= Student.builder()
                 .firstName("Daniello")
                 .lastName("Mesi")
-                .email("damesi@gmail.com")
+                .email("damesi222@gmail.com")
                 .guardian(guardian)
                 .build();
 
@@ -103,5 +103,37 @@ class StudentRepositoryTest {
     void printStudentFirstByEmail(){
         String studentFirstName=studentRepository.getStudentFirstNameByEmailAddress("sarita2@bes.edu");
         System.out.println("First name = "+ studentFirstName);
+    }
+
+    @Test
+    void printStudentByEmailNative(){
+        Student student=studentRepository.getStudentByEmailAddressNative("hanu@bes.edu");
+
+        System.out.println("Student with email hanu@bes.edu = "  + student );
+    }
+
+    @Test
+    void printStudentByEmailNativeNamedParam(){
+        Student student=studentRepository.getStudentByEmailAddressNativeNamedParam("hanu@bes.edu");
+
+        System.out.println("Student with email hanu@bes.edu = "  + student );
+    }
+
+    @Test
+    public void updateStudentFirstNameByEmail(){
+
+        studentRepository.updateStudentByEmail("Dani","damesi2@gmail.com");
+    }
+
+    @Test
+    public void deleteStudentByEmail(){
+        int rowsAffected = studentRepository.deleteStudentByEmail("damesi222@gmail.com");
+
+        if (rowsAffected > 0) {
+            System.out.println("Student deleted successfully.");
+        } else {
+            System.out.println("No student found with the specified email.");
+        }
+
     }
 }
